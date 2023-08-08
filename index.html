@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Comment Board</title>
-  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
   <script src="script.js"></script>
+  <title>Comment Board</title>
 </head>
 <body>
-  <h1>Welcome to the Comment Board</h1>
-  <form id="comment-form">
-    <input type="text" id="comment-input" placeholder="Leave a comment">
-    <button type="submit">Submit</button>
-  </form>
-  <div id="comments-container"></div>
+  <h1>Comment Board</h1>
+  <div id="comments">
+    <!-- Comments will be displayed here -->
+  </div>
+  <textarea id="commentInput" placeholder="Enter your comment"></textarea>
+  <button id="submitComment">Submit Comment</button>
 </body>
 </html>
