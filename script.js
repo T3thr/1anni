@@ -7,33 +7,38 @@ document.addEventListener("DOMContentLoaded", function () {
     apiKey: "AIzaSyDCS6hFxkfaqyTWvO7Zlo23zDbAWh8U3Oc",
     authDomain: "anni-e336f.firebaseapp.com",
     projectId: "anni-e336f",
+     storageBucket: "anni-e336f.appspot.com",
+    messagingSenderId: "773257785211",
+    appId: "1:773257785211:web:7735061a858604eb7757de"
   });
 
-  const db = firebase.firestore();
+irebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-  submitButton.addEventListener("click", function () {
-    const commentText = commentInput.value;
-    if (commentText !== "") {
-      // Add comment to Firestore
-      db.collection("comments").add({
-        text: commentText,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      });
+const commentForm = document.getElementById("comment-form");
+const commentInput = document.getElementById("comment-input");
+const commentsContainer = document.getElementById("comments-container");
 
-      commentInput.value = "";
-    }
+commentForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const commentText = commentInput.value;
+  await db.collection("comments").add({
+    text: commentText,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
   });
 
-  // Listen for changes in the comments collection and update the UI
-  db.collection("comments")
-    .orderBy("timestamp")
-    .onSnapshot(function (snapshot) {
-      commentList.innerHTML = "";
-      snapshot.forEach(function (doc) {
-        const commentItem = document.createElement("li");
-        commentItem.className = "comment";
-        commentItem.textContent = doc.data().text;
-        commentList.appendChild(commentItem);
-      });
-    });
+  commentInput.value = "";
 });
+
+db.collection("comments")
+  .orderBy("timestamp", "desc")
+  .onSnapshot((snapshot) => {
+    commentsContainer.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const comment = doc.data();
+      const commentElement = document.createElement("div");
+      commentElement.innerText = comment.text;
+      commentsContainer.appendChild(commentElement);
+    });
+  });
