@@ -1,9 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const commentList = document.getElementById("comment-list");
-  const commentInput = document.getElementById("comment-input");
-  const submitButton = document.getElementById("submit-button");
-
-  firebase.initializeApp({
+const firebaseConfig = {
     apiKey: "AIzaSyDCS6hFxkfaqyTWvO7Zlo23zDbAWh8U3Oc",
     authDomain: "anni-e336f.firebaseapp.com",
     projectId: "anni-e336f",
