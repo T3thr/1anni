@@ -1,31 +1,13 @@
-// Fetch Google Sheet data using Google Sheets API
-function fetchSheetData() {
-    // Replace with your own Google Sheets API key and spreadsheet ID
-    const apiKey = "AIzaSyDCS6hFxkfaqyTWvO7Zlo23zDbAWh8U3Oc";
-    const spreadsheetId = "1_moyVZ-HgihXBqrvqW2zEsRtn8dEN-5CtMpBnvhEI9s/edit#gid=0";
+$(document).ready(function() {
+    // Fetch Google Sheet data using Google Sheets API (replace with your API endpoint)
+    const googleSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSHPyTes5nTyz5_AYHdT7i9GkBZOimW4OINBRKmi3K9rFaGHfYtJAbklfSB2dA8_k3FJPhpLprFcsjh/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false";
 
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?key=${apiKey}`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values.slice(1); // Skip header row
-            const tableBody = document.getElementById("tableBody");
-
-            tableBody.innerHTML = ""; // Clear existing rows
-
-            rows.forEach(row => {
-                const roomNumber = row[0];
-                const availability = row[1];
-                const newRow = tableBody.insertRow();
-                newRow.insertCell(0).textContent = roomNumber;
-                newRow.insertCell(1).textContent = availability;
-            });
-        })
-        .catch(error => {
-            console.error("Error fetching sheet data:", error);
+    $.getJSON(googleSheetUrl, function(data) {
+        const tableBody = document.getElementById("tableBody");
+        data.forEach(row => {
+            const newRow = tableBody.insertRow();
+            newRow.insertCell(0).textContent = row[0]; // Assuming room number is in the first column
+            newRow.insertCell(1).textContent = row[1]; // Assuming availability is in the second column
         });
-}
-
-// Call fetchSheetData to load Google Sheet data when the page loads
-fetchSheetData();
+    });
+});
