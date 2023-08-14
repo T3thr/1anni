@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
-  <script src="script.js"></script>
-  <title>Comment Board</title>
+    <title>Classroom Booking</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Comment Board</h1>
-  <div id="comments">
-    <!-- Comments will be displayed here -->
-  </div>
-  <textarea id="commentInput" placeholder="Enter your comment"></textarea>
-  <button id="submitComment">Submit Comment</button>
+    <div class="container">
+        <div class="left-side">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeQCsq0GeFNJfXmaVmBQil-DIqDkKWhMdWkGDR2-h6CJKJ6yw/viewform?usp=sf_link" frameborder="0"></iframe>
+        </div>
+        <div class="right-side">
+            <table id="availabilityTable">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Availability</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Table rows will be added dynamically using JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
